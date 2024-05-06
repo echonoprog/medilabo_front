@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="css/style.css" />
+	<title>MEDILABO</title>
+</head>
+
+
+<body>
+<div id="bloc_page">
+	<div id="tete">
+		<div id="tete1">
+
+			<div id="logo">
+				<img src="images/medilaboLogo.png" class="imageflottante" alt="medilabologo" />
+			</div>
+
+			<div id="presentation">
+				<div class="menu">
+					<ul class="menu-links">
+						<li><a href="/patientList">Informations personnelles du patient</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="bloc1">
+			<div id="logout-button">
+				<a href="/logout"><button>Déconnexion</button></a>
+			</div>
+
+			<div id="description">
+				<p>Bienvenue " USER ", vous êtes connecté en tant que "USER ".</p><br/>
+
+				<p class="niv"> Mise à jour le 06/05/2024</p>
+			</div>
+
+
+			<div id="contenu">
+				<section>
+					<h2> LISTE DES PATIENTS </h2>
+					<table>
+						<tr>
+							<th>ID</th>
+							<th>Prénom</th>
+							<th>Nom</th>
+							<th>Date de naissance</th>
+							<th>Genre</th>
+							<th>Adresse</th>
+							<th>Téléphone</th>
+						</tr>
+						<tr th:each="patient : ${patients}">
+							<td th:text="${patient.id}"></td>
+							<td th:text="${patient.prenom}"></td>
+							<td th:text="${patient.nom}"></td>
+							<td th:text="${#temporals.format(patient.dateDeNaissance, 'dd/MM/yyyy')}"></td>
+							<td th:text="${patient.genre}"></td>
+							<td th:text="${patient.adressePostale}"></td>
+							<td th:text="${patient.numeroTelephone}"></td>
+							<td style="width: 15%" class="text-center">
+								<a th:href="@{/updatePatient/{id}(id=${patient.id})}">Edit</a>
+								<a th:href="@{/}"method="post">Delete</a>
+							</td>
+						</tr>
+					</table>
+				</section>
+			</div>
+		</div>
+
+	</div>
+	<footer>
+		Médilabo Solutions @2024
+	</footer>
+
+
+</div>
+</body>
+
+</html>
