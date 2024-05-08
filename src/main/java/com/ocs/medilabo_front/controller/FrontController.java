@@ -1,6 +1,7 @@
 package com.ocs.medilabo_front.controller;
 
 import com.ocs.medilabo_front.beans.PatientBean;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Arrays;
+
+import javax.validation.Valid;
 
 @Controller
 public class FrontController {
@@ -45,4 +48,30 @@ public class FrontController {
         restTemplate.put(endpoint, patient);
         return "redirect:/patientList";
     }
+
+    @GetMapping("/addPatient")
+    public String showAddPatientForm(Model model) {
+        model.addAttribute("newPatient", new PatientBean());
+        return "addPatient";
+    }
+
+    @PostMapping("/addPatient")
+    public String processAddPatientForm(@Valid @ModelAttribute PatientBean newPatient, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("newPatient", newPatient);
+            return "addPatient";
+        } else {
+            String endpoint = backendUrl + patientEndpoint;
+            restTemplate.postForObject(endpoint, newPatient, PatientBean.class);
+            return "redirect:/patientList";
+        }
+    }
+
+    @GetMapping("/deletePatient/{id}")
+    public String deletePatient(@PathVariable Long id) {
+        String endpoint = backendUrl + patientEndpoint + "/" + id;
+        restTemplate.delete(endpoint);
+        return "redirect:/patientList";
+    }
+
 }

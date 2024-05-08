@@ -4,11 +4,17 @@ import java.time.LocalDate;
 
 public class PatientBean {
     private Long id;
+
     private String prenom;
+
     private String nom;
+
     private LocalDate dateDeNaissance;
+
     private String genre;
+
     private String adressePostale;
+
     private String numeroTelephone;
 
     public Long getId() {

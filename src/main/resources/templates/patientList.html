@@ -39,6 +39,12 @@
 
 
 			<div id="contenu">
+
+				<div id="ajout-patient-button">
+					<a href="/addPatient"><button>Ajouter un patient</button></a>
+				</div>
+
+
 				<section>
 					<h2> LISTE DES PATIENTS </h2>
 					<table>
@@ -61,7 +67,7 @@
 							<td th:text="${patient.numeroTelephone}"></td>
 							<td style="width: 15%" class="text-center">
 								<a th:href="@{/updatePatient/{id}(id=${patient.id})}">Edit</a>
-								<a th:href="@{/}"method="post">Delete</a>
+								<a th:href="@{/deletePatient/{id}(id=${patient.id})}">Delete</a>
 							</td>
 						</tr>
 					</table>
