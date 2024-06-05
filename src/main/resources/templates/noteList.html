@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Liste des notes</title>
+</head>
+<body>
+<div id="bloc_page">
+    <div id="contenu">
+        <section>
+            <h2> LISTE DES NOTES </h2>
+            <table>
+                <tr>
+                    <th>Identifiant Patient</th>
+                    <th>Nom du Patient</th>
+                    <th>Note</th>
+                </tr>
+
+                <tr th:each="note : ${notes}">
+                    <td th:text="${note.patId}"></td>
+                    <td th:text="${note.patient}"></td>
+                    <td th:text="${note.note}"></td>
+                </tr>
+            </table>
+        </section>
+    </div>
+</div>
+</body>
+</html>

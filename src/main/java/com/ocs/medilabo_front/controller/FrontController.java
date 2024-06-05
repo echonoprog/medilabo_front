@@ -1,5 +1,6 @@
 package com.ocs.medilabo_front.controller;
 
+import com.ocs.medilabo_front.beans.NoteBean;
 import com.ocs.medilabo_front.beans.PatientBean;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ public class FrontController {
 
     private final String backendUrl = "http://localhost:8080";
     private final String patientEndpoint = "/patients";
+    private final String noteEndpoint = "http://localhost:8083/notes";
     private final RestTemplate restTemplate;
 
     public FrontController() {
@@ -72,6 +74,63 @@ public class FrontController {
         String endpoint = backendUrl + patientEndpoint + "/" + id;
         restTemplate.delete(endpoint);
         return "redirect:/patientList";
+    }
+
+    @GetMapping("/noteList")
+    public String showAllNotes(Model model) {
+        String noteEndpoint = backendUrl + "/notes";
+        ResponseEntity<NoteBean[]> response = restTemplate.getForEntity(noteEndpoint, NoteBean[].class);
+        List<NoteBean> notes = Arrays.asList(response.getBody());
+        model.addAttribute("notes", notes);
+        return "noteList";
+    }
+
+    @GetMapping("/updateNote/{id}")
+    public String showUpdateNoteForm(@PathVariable String id, Model model) {
+        String endpoint = noteEndpoint + "/" + id;
+        ResponseEntity<NoteBean> response = restTemplate.getForEntity(endpoint, NoteBean.class);
+        NoteBean note = response.getBody();
+        model.addAttribute("note", note);
+        return "updateNote";
+    }
+
+    @PostMapping("/updateNote/{id}")
+    public String processUpdateNoteForm(@PathVariable String id, @ModelAttribute NoteBean note) {
+        String endpoint = noteEndpoint + "/" + id;
+        restTemplate.put(endpoint, note);
+        return "redirect:/noteList";
+    }
+
+    @GetMapping("/addNote/{id}")
+    public String showAddNoteForm(@PathVariable Long id, Model model) {
+        NoteBean newNote = new NoteBean();
+        newNote.setPatId(id);
+
+        // Récupérer les détails du patient
+        String endpoint = backendUrl + patientEndpoint + "/" + id;
+        ResponseEntity<PatientBean> patientResponse = restTemplate.getForEntity(endpoint, PatientBean.class);
+        PatientBean patient = patientResponse.getBody();
+        newNote.setPatient(patient.getNom());
+
+        model.addAttribute("newNote", newNote);
+        model.addAttribute("patient", patient);
+        return "addNote";
+    }
+
+    @PostMapping("/addNote/{id}")
+    public String processAddNoteForm(@PathVariable Long id, @ModelAttribute NoteBean newNote, @RequestParam String patientName) {
+        newNote.setPatId(id);
+        newNote.setPatient(patientName);
+        String endpoint = noteEndpoint;
+        restTemplate.postForObject(endpoint, newNote, NoteBean.class);
+        return "redirect:/noteList";
+    }
+
+    @GetMapping("/deleteNote/{id}")
+    public String deleteNote(@PathVariable String id) {
+        String endpoint = noteEndpoint + "/" + id;
+        restTemplate.delete(endpoint);
+        return "redirect:/noteList";
     }
 
 }

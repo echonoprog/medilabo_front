@@ -2,211 +2,127 @@
     font-family: 'amblelight';
     src: url('fonts/Amble-Light-webfont.eot');
     src: url('fonts/Amble-Light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Amble-Light-webfont.woff2') format('woff2'),
-         url('fonts/Amble-Light-webfont.woff') format('woff'),
-         url('fonts/Amble-Light-webfont.ttf') format('truetype'),
-         url('fonts/Amble-Light-webfont.svg#amblelight') format('svg');
+    url('fonts/Amble-Light-webfont.woff2') format('woff2'),
+    url('fonts/Amble-Light-webfont.woff') format('woff'),
+    url('fonts/Amble-Light-webfont.ttf') format('truetype'),
+    url('fonts/Amble-Light-webfont.svg#amblelight') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
-#bloc_page
-{
+#bloc_page {
     width: 930px;
     margin: auto; /*centrer la page*/
     border: 1px black dotted;
     border-radius: 5px;
     box-shadow: 2px 2px 2px grey;
-
-
 }
 
-
-@media all and (max-width: 1024px)
-{
-    #bloc_page
-    {
+@media all and (max-width: 1024px) {
+    #bloc_page {
         width: auto;
-
-
     }
 
-    #tete
-	{
-
-
-	flex-direction: column;
-
-
-	}
-
-
-
+    #tete {
+        flex-direction: column;
+    }
 }
-
-
-
 
 /* ************************************************************ */
 
-
-
-#tete
-{
-
+#tete {
     display: flex;
-
-
 }
 
-
-#tete1
-{
-
-
-
+#tete1 {
     margin-right: 20px;
-
 }
 
-
-
-
-
-#logo
-{
-
-	border-left: 0px black dotted;
-	border-bottom: 0px black dotted;
-  	border-right: 0px black dotted;
-
+#logo {
+    border-left: 0px black dotted;
+    border-bottom: 0px black dotted;
+    border-right: 0px black dotted;
 }
 
-#logo img
-{
-
+#logo img {
     width: 271px;
-  	height: 124px;
+    height: 124px;
     padding-left: 20px;
     padding-top: 30px;
 }
 
-
-
-#description
-{
-
-
- 	border-left: 1px black dotted;
- 	font-size: 15px;
+#description {
+    border-left: 1px black dotted;
+    font-size: 15px;
     padding-left: 10px;
-
-
-
 }
 
-
-
-.niv
-{
-
-	font-size:10px;
-
+.niv {
+    font-size: 10px;
 }
 
-#bloc1
-{
-	display: flex;
-	flex-direction: column;
-	border-left: 0px black dotted;
-
-
+#bloc1 {
+    display: flex;
+    flex-direction: column;
+    border-left: 0px black dotted;
 }
 
-
-#presentation
-{
+#presentation {
     font-family: amblelight;
     font-size: 11px;
     padding-left: 10px;
     border-right: 0px black solid;
-
 }
 
-
-
-
-
-#contenu
-{
-
-	display: flex;
-	flex-direction: column;
-	border-left: 0px black dotted;
-	border-top: 0px black dotted;
+#contenu {
+    display: flex;
+    flex-direction: column;
+    border-left: 0px black dotted;
+    border-top: 0px black dotted;
 }
 
-
-
-
-
-h2
-{
-
-	font-size: 15px;
-	font-family: amblelight;
+h2 {
+    font-size: 15px;
+    font-family: amblelight;
     font-weight: normal;
-	border-bottom: 2px black dotted;
-
-	background-color: rgb(237, 237, 238);
+    border-bottom: 2px black dotted;
+    background-color: rgb(237, 237, 238);
     margin-left: 3px;
-
 }
 
-h3
-{
+h3 {
     font-size: 12px;
     font-family: amblelight;
     margin-left: 2px;
 }
-h4
-{
+
+h4 {
     font-size: 11px;
     font-family: amblelight;
     margin-left: 2px;
 }
 
-p
-{
-
+p {
     font-family: amblelight;
-
 }
 
-footer
-{
+footer {
     display: flex;
     justify-content: flex-end;
     padding-right: 10px;
     background-color: #ebebed;
     border-top: 1px black dotted;
-  	font-family: amblelight;
-  	font-size: 11px;
-
+    font-family: amblelight;
+    font-size: 11px;
 }
 
 table {
-
     border-radius: 5px;
     margin-top: 20px;
     width: 100%;
-
-
 }
 
 th, td {
-
     border: 2px dotted #eae3e4;
     font-family: amblelight;
     font-weight: normal;
