@@ -1,18 +1,19 @@
 package com.ocs.medilabo_front.beans;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.UUID;
+
+@Document
 public class NoteBean {
-    private String id;
+    @Id
+    private UUID id;
     private Long patId;
     private String patient;
     private String note;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Long getPatId() {
         return patId;

@@ -69,6 +69,7 @@
 								<a th:href="@{/updatePatient/{id}(id=${patient.id})}">Edit</a>
 								<a th:href="@{/deletePatient/{id}(id=${patient.id})}">Delete</a>
 								<a th:href="@{'/addNote/' + ${patient.id}}">Ajouter une note</a>
+								<a th:href="@{'/noteList/' + ${patient.id}}">Voir les notes</a>
 							</td>
 						</tr>
 					</table>
