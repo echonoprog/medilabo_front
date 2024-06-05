@@ -10,7 +10,6 @@
     <form th:object="${newNote}" th:action="@{/addNote/{id}(id=${newNote.patId}, patientName=${patient.nom})}" method="post" class="form-horizontal" style="width: 100%">
 
         <div class="form-group">
-            <label for="note" class="col-sm-2 control-label">Note</label>
             <div class="col-sm-10">
                 <textarea th:field="*{note}" id="note" placeholder="Ajouter une note" class="col-4" required></textarea>
             </div>
@@ -21,6 +20,8 @@
             </div>
         </div>
     </form>
+
+
 </div>
 </body>
 </html>

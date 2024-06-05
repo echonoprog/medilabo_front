@@ -40,10 +40,12 @@
 
 			<div id="contenu">
 
-				<div id="ajout-patient-button">
-					<a href="/addPatient"><button>Ajouter un patient</button></a>
+				<div class="button-container">
+					<a th:href="@{/addPatient}" class="button">Ajouter un patient</a>
+					<a th:href="@{/noteList}" class="button">Historique des notes</a>
 				</div>
 
+				<div class="confirmation-message" th:if="${confirmationMessage}" th:text="${confirmationMessage}"></div>
 
 				<section>
 					<h2> LISTE DES PATIENTS </h2>
@@ -65,11 +67,11 @@
 							<td th:text="${patient.genre}"></td>
 							<td th:text="${patient.adressePostale}"></td>
 							<td th:text="${patient.numeroTelephone}"></td>
-							<td style="width: 15%" class="text-center">
+							<td style="width: 15%" class="action-buttons">
 								<a th:href="@{/updatePatient/{id}(id=${patient.id})}">Edit</a>
 								<a th:href="@{/deletePatient/{id}(id=${patient.id})}">Delete</a>
 								<a th:href="@{'/addNote/' + ${patient.id}}">Ajouter une note</a>
-								<a th:href="@{'/noteList/' + ${patient.id}}">Voir les notes</a>
+								<a th:href="@{'/noteList/patient/' + ${patient.id}}">Voir les notes</a>
 							</td>
 						</tr>
 					</table>

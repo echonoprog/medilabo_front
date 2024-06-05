@@ -12,7 +12,7 @@
 
 #bloc_page {
     width: 930px;
-    margin: auto; /*centrer la page*/
+    margin: auto; /* centrer la page */
     border: 1px black dotted;
     border-radius: 5px;
     box-shadow: 2px 2px 2px grey;
@@ -28,7 +28,47 @@
     }
 }
 
-/* ************************************************************ */
+.confirmation-message {
+    font-family: 'amblelight', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: green;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 2px solid green;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.left-button {
+    margin-left: 20px;
+}
+
+.button-container a {
+    font-family: 'amblelight', sans-serif;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    margin: 0 10px;
+}
+
+.button-container a:hover {
+    background-color: #e0e0e0;
+}
+
+.btn {
+    font-family: 'amblelight', sans-serif;
+}
 
 #tete {
     display: flex;
@@ -68,7 +108,7 @@
 }
 
 #presentation {
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
     font-size: 11px;
     padding-left: 10px;
     border-right: 0px black solid;
@@ -83,7 +123,7 @@
 
 h2 {
     font-size: 15px;
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
     font-weight: normal;
     border-bottom: 2px black dotted;
     background-color: rgb(237, 237, 238);
@@ -92,18 +132,18 @@ h2 {
 
 h3 {
     font-size: 12px;
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
     margin-left: 2px;
 }
 
 h4 {
     font-size: 11px;
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
     margin-left: 2px;
 }
 
 p {
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
 }
 
 footer {
@@ -112,7 +152,7 @@ footer {
     padding-right: 10px;
     background-color: #ebebed;
     border-top: 1px black dotted;
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
     font-size: 11px;
 }
 
@@ -124,7 +164,7 @@ table {
 
 th, td {
     border: 2px dotted #eae3e4;
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
     font-weight: normal;
 }
 
@@ -136,11 +176,11 @@ tr:nth-child(even) {
     display: flex;
     justify-content: flex-end;
     padding: 10px;
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
 }
 
 #logout-button button {
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
     background-color: #f2f2f2;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -152,14 +192,45 @@ tr:nth-child(even) {
     display: flex;
     justify-content: flex-end;
     padding: 10px;
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
 }
 
 #ajout-patient-button button {
-    font-family: amblelight;
+    font-family: 'amblelight', sans-serif;
     background-color: #f2f2f2;
     border: 1px solid #ccc;
     border-radius: 3px;
     padding: 8px 12px;
     cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.action-buttons a {
+    font-family: 'amblelight', sans-serif;
+    font-size: 14px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    white-space: nowrap;
+    width: 100px;
+}
+
+.action-buttons a:hover {
+    background-color: #e0e0e0;
 }

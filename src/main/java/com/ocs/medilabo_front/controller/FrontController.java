@@ -2,15 +2,19 @@ package com.ocs.medilabo_front.controller;
 
 import com.ocs.medilabo_front.beans.NoteBean;
 import com.ocs.medilabo_front.beans.PatientBean;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Arrays;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -91,15 +95,19 @@ public class FrontController {
         ResponseEntity<NoteBean> response = restTemplate.getForEntity(endpoint, NoteBean.class);
         NoteBean note = response.getBody();
         model.addAttribute("note", note);
+        model.addAttribute("patId", note.getPatId());
         return "updateNote";
     }
 
+
     @PostMapping("/updateNote/{id}")
-    public String processUpdateNoteForm(@PathVariable String id, @ModelAttribute NoteBean note) {
+    public String processUpdateNoteForm(@PathVariable String id, @ModelAttribute NoteBean note, RedirectAttributes redirectAttributes) {
         String endpoint = noteEndpoint + "/" + id;
         restTemplate.put(endpoint, note);
-        return "redirect:/noteList";
+        redirectAttributes.addFlashAttribute("confirmationMessage", "La note a été mise à jour avec succès.");
+        return "redirect:/updateNote/" + id + "?patId=" + note.getPatId();
     }
+
 
     @GetMapping("/addNote/{id}")
     public String showAddNoteForm(@PathVariable Long id, Model model) {
@@ -118,21 +126,33 @@ public class FrontController {
     }
 
     @PostMapping("/addNote/{id}")
-    public String processAddNoteForm(@PathVariable Long id, @ModelAttribute NoteBean newNote, @RequestParam String patientName) {
+    public String processAddNoteForm(@PathVariable Long id, @ModelAttribute NoteBean newNote, @RequestParam String patientName, RedirectAttributes redirectAttributes) {
         newNote.setPatId(id);
         newNote.setPatient(patientName);
         String endpoint = noteEndpoint;
         restTemplate.postForObject(endpoint, newNote, NoteBean.class);
-        return "redirect:/noteList";
+        redirectAttributes.addFlashAttribute("confirmationMessage", "La note a été ajoutée avec succès.");
+        return "redirect:/patientList";
     }
 
     @GetMapping("/deleteNote/{id}")
-    public String deleteNote(@PathVariable String id) {
+    public String deleteNote(@PathVariable String id, @RequestParam Long patId, RedirectAttributes redirectAttributes) {
         String endpoint = noteEndpoint + "/" + id;
         restTemplate.delete(endpoint);
-        return "redirect:/noteList";
+        redirectAttributes.addFlashAttribute("confirmationMessage", "La note a été supprimée avec succès.");
+        return "redirect:/noteList/patient/" + patId;
     }
 
+
+    @GetMapping("/noteList/patient/{patId}")
+    public String showNotesByPatient(@PathVariable Long patId, Model model) {
+        String endpoint = noteEndpoint + "/patient/" + patId;
+        ResponseEntity<NoteBean[]> response = restTemplate.getForEntity(endpoint, NoteBean[].class);
+        List<NoteBean> notes = Arrays.asList(response.getBody());
+        model.addAttribute("notes", notes);
+        model.addAttribute("patId", patId);
+        return "noteListByPatient";
+    }
 
 
 }

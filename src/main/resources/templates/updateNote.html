@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Mettre à jour une note</title>
+</head>
+<body>
+<div id="bloc_page">
+    <div id="contenu">
+        <section>
+            <h2>Mettre à jour une note</h2>
+
+            <div th:if="${confirmationMessage}" class="confirmation-message" th:text="${confirmationMessage}"></div>
+
+            <form th:action="@{/updateNote/{id}(id=${note.id})}" th:object="${note}" method="post">
+                <div class="form-group">
+                    <textarea th:field="*{note}" id="note" class="form-control"></textarea>
+                </div>
+                <div class="button-container">
+                    <div class="left-button">
+                        <button type="submit" class="btn btn-primary">Mise à jour</button>
+                    </div>
+                    <a th:href="@{/noteList/patient/{patId}(patId=${note.patId})}" class="btn btn-primary">Retour à la liste des notes</a>
+                </div>
+
+            </form>
+        </section>
+    </div>
+
+
+    </form>
+        </section>
+    </div>
+</div>
+</body>
+</html>

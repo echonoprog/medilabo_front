@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>HISTORIQUE DES NOTES DU PATIENT</title>
+</head>
+<body>
+<div id="bloc_page">
+    <div id="contenu">
+        <section>
+            <h2> HISTORIQUE DES NOTES DU PATIENT </h2>
+
+            <div th:if="${confirmationMessage}" class="confirmation-message" th:text="${confirmationMessage}"></div>
+
+            <table>
+                <tr>
+                    <th>NOTES</th>
+                    <th>ACTIONS</th>
+                </tr>
+
+                <tr th:each="note : ${notes}">
+                    <td th:text="${note.note}"></td>
+                    <td>
+                        <a th:href="@{/updateNote/{id}(id=${note.id}, patId=${patId})}">Éditer</a>
+                        <a th:href="@{/deleteNote/{id}(id=${note.id}, patId=${patId})}">Supprimer</a>
+                    </td>
+                </tr>
+
+            </table>
+        </section>
+    </div>
+</div>
+</body>
+</html>
