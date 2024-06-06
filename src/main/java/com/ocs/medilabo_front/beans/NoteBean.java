@@ -1,13 +1,19 @@
 package com.ocs.medilabo_front.beans;
 
-import org.springframework.data.annotation.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
-@Document
 public class NoteBean {
-    @Id
+
     private String id;
     private Long patId;
     private String patient;

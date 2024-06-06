@@ -126,14 +126,19 @@ public class FrontController {
     }
 
     @PostMapping("/addNote/{id}")
-    public String processAddNoteForm(@PathVariable Long id, @ModelAttribute NoteBean newNote, @RequestParam String patientName, RedirectAttributes redirectAttributes) {
+    public String processAddNoteForm(@PathVariable Long id, @ModelAttribute("newNote") NoteBean formNote, @RequestParam String patientName, RedirectAttributes redirectAttributes) {
+        NoteBean newNote = new NoteBean();
         newNote.setPatId(id);
         newNote.setPatient(patientName);
+        newNote.setNote(formNote.getNote());
+
         String endpoint = noteEndpoint;
         restTemplate.postForObject(endpoint, newNote, NoteBean.class);
         redirectAttributes.addFlashAttribute("confirmationMessage", "La note a été ajoutée avec succès.");
-        return "redirect:/patientList";
+        return "redirect:/noteList/patient/" + id;
     }
+
+
 
     @GetMapping("/deleteNote/{id}")
     public String deleteNote(@PathVariable String id, @RequestParam Long patId, RedirectAttributes redirectAttributes) {
