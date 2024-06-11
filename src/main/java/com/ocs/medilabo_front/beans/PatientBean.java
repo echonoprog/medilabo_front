@@ -1,5 +1,7 @@
 package com.ocs.medilabo_front.beans;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 public class PatientBean {
@@ -8,7 +10,7 @@ public class PatientBean {
     private String prenom;
 
     private String nom;
-
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateDeNaissance;
 
     private String genre;

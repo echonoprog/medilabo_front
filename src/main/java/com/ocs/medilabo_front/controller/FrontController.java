@@ -12,9 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
-import java.util.UUID;
+
 
 import javax.validation.Valid;
 
@@ -24,6 +25,7 @@ public class FrontController {
     private final String backendUrl = "http://localhost:8080";
     private final String patientEndpoint = "/patients";
     private final String noteEndpoint = "http://localhost:8083/notes";
+    private final String riskEndpoint = "/risk";
     private final RestTemplate restTemplate;
 
     public FrontController() {
@@ -35,7 +37,16 @@ public class FrontController {
         String endpoint = backendUrl + patientEndpoint;
         ResponseEntity<PatientBean[]> response = restTemplate.getForEntity(endpoint, PatientBean[].class);
         List<PatientBean> patients = Arrays.asList(response.getBody());
+
+        // Récupérer le niveau de risque pour chaque patient
+        List<String> riskLevels = new ArrayList<>();
+        for (PatientBean patient : patients) {
+            String riskLevel = restTemplate.getForObject(backendUrl + riskEndpoint + "/{id}", String.class, patient.getId());
+            riskLevels.add(riskLevel);
+        }
+
         model.addAttribute("patients", patients);
+        model.addAttribute("riskLevels", riskLevels);
         return "patientList";
     }
 
@@ -150,13 +161,19 @@ public class FrontController {
 
 
     @GetMapping("/noteList/patient/{patId}")
-    public String showNotesByPatient(@PathVariable Long patId, Model model) {
+    public String getNotesByPatientId(@PathVariable Long patId, Model model) {
         String endpoint = noteEndpoint + "/patient/" + patId;
         ResponseEntity<NoteBean[]> response = restTemplate.getForEntity(endpoint, NoteBean[].class);
         List<NoteBean> notes = Arrays.asList(response.getBody());
         model.addAttribute("notes", notes);
         model.addAttribute("patId", patId);
         return "noteListByPatient";
+    }
+
+    @GetMapping("/riskLevel/{id}")
+    public String getRiskLevel(@PathVariable Long id) {
+        String riskLevel = restTemplate.getForObject(backendUrl + riskEndpoint + "/{id}", String.class, id);
+        return riskLevel;
     }
 
 

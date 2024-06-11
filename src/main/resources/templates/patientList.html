@@ -58,6 +58,7 @@
 							<th>Genre</th>
 							<th>Adresse</th>
 							<th>Téléphone</th>
+							<th>Risque</th>
 						</tr>
 						<tr th:each="patient : ${patients}">
 							<td th:text="${patient.id}"></td>
@@ -67,6 +68,10 @@
 							<td th:text="${patient.genre}"></td>
 							<td th:text="${patient.adressePostale}"></td>
 							<td th:text="${patient.numeroTelephone}"></td>
+
+							<td th:with="riskLevel=${@frontController.getRiskLevel(patient.id)}">
+								<span th:text="${riskLevel}"></span>
+							</td>
 							<td style="width: 15%" class="action-buttons">
 								<a th:href="@{/updatePatient/{id}(id=${patient.id})}">Edit</a>
 								<a th:href="@{/deletePatient/{id}(id=${patient.id})}">Delete</a>
