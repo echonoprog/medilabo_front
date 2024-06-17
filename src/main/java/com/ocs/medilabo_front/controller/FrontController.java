@@ -22,9 +22,9 @@ import javax.validation.Valid;
 @Controller
 public class FrontController {
 
-    private final String backendUrl = "http://localhost:8080";
+    private final String backendUrl = "http://medilabo-gateway:8080";
     private final String patientEndpoint = "/patients";
-    private final String noteEndpoint = "http://localhost:8083/notes";
+    private final String noteEndpoint = "/notes";
     private final String riskEndpoint = "/risk";
     private final RestTemplate restTemplate;
 
@@ -102,7 +102,7 @@ public class FrontController {
 
     @GetMapping("/updateNote/{id}")
     public String showUpdateNoteForm(@PathVariable String id, Model model) {
-        String endpoint = noteEndpoint + "/" + id;
+        String endpoint = backendUrl + noteEndpoint + "/" + id;
         ResponseEntity<NoteBean> response = restTemplate.getForEntity(endpoint, NoteBean.class);
         NoteBean note = response.getBody();
         model.addAttribute("note", note);
@@ -113,7 +113,7 @@ public class FrontController {
 
     @PostMapping("/updateNote/{id}")
     public String processUpdateNoteForm(@PathVariable String id, @ModelAttribute NoteBean note, RedirectAttributes redirectAttributes) {
-        String endpoint = noteEndpoint + "/" + id;
+        String endpoint = backendUrl + noteEndpoint + "/" + id;
         restTemplate.put(endpoint, note);
         redirectAttributes.addFlashAttribute("confirmationMessage", "La note a été mise à jour avec succès.");
         return "redirect:/updateNote/" + id + "?patId=" + note.getPatId();
@@ -143,7 +143,7 @@ public class FrontController {
         newNote.setPatient(patientName);
         newNote.setNote(formNote.getNote());
 
-        String endpoint = noteEndpoint;
+        String endpoint = backendUrl + noteEndpoint;
         restTemplate.postForObject(endpoint, newNote, NoteBean.class);
         redirectAttributes.addFlashAttribute("confirmationMessage", "La note a été ajoutée avec succès.");
         return "redirect:/noteList/patient/" + id;
@@ -153,7 +153,7 @@ public class FrontController {
 
     @GetMapping("/deleteNote/{id}")
     public String deleteNote(@PathVariable String id, @RequestParam Long patId, RedirectAttributes redirectAttributes) {
-        String endpoint = noteEndpoint + "/" + id;
+        String endpoint = backendUrl + noteEndpoint + "/" + id;
         restTemplate.delete(endpoint);
         redirectAttributes.addFlashAttribute("confirmationMessage", "La note a été supprimée avec succès.");
         return "redirect:/noteList/patient/" + patId;
@@ -162,7 +162,7 @@ public class FrontController {
 
     @GetMapping("/noteList/patient/{patId}")
     public String getNotesByPatientId(@PathVariable Long patId, Model model) {
-        String endpoint = noteEndpoint + "/patient/" + patId;
+        String endpoint = backendUrl + noteEndpoint + "/patient/" + patId;
         ResponseEntity<NoteBean[]> response = restTemplate.getForEntity(endpoint, NoteBean[].class);
         List<NoteBean> notes = Arrays.asList(response.getBody());
         model.addAttribute("notes", notes);
