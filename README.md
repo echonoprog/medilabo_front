@@ -11,6 +11,7 @@ Le produit permettra d'identifier les patients à risque de diabète de type 2 e
 http://localhost:8082/login 
 
 LOGIN : admin
+
 MDP : test
 
 4.	Green code :
