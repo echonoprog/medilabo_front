@@ -18,6 +18,9 @@ MDP : test
 Suggestions 
 
 •	Privilégier l'hébergement dans des datacenters utilisant des énergies renouvelables
+
 •	Mettre en place des mécanismes de mise en veille et d'extinction automatique des ressources inutilisées
+
 •	Proposer des interfaces utilisateur épurées, sans éléments graphiques gourmands en ressources
+
 •	Sensibiliser les utilisateurs aux bonnes pratiques de sobriété numérique (réduction des impressions, des emails, etc.)
